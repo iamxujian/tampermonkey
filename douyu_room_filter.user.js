@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         douyu_room_filter
 // @namespace    https://github.com/iamxujian
-// @version      0.1
+// @version      0.2
 // @description  enter something useful
 // @author       xujian<iamxujian@live.com>
 // @match        http://www.douyutv.com/directory*
@@ -11,15 +11,18 @@
 console.log("start douyu room filter")
 
 blacklist = {
-    "title":    [/gta/i, /lol/i, /三国战纪/,
+    "title":    [/gta/i, /lol/i, /三国战纪/, /H1Z1/i, /如龙/,
                  /running.*man/i, /(千种死法|福利)/, /韩.*(女|腿)/, /t-?ara/i, /王大锤/, /(智妍|孝敏)/,
                  /少女时代/, /aoa/i, /代练/, /定(位|级)赛?/, /庞麦郎/,
                  /接单/],
     "author":   [/^(哀绿|安德罗妮丶|Aceymomo|中南校长|林宝宝大魔王|Amorjojo|倾城小优|漏漏|安全套不套)$/,
                  /庞麦郎/,
+                 /叶子小叶子/,
                  /^炉石王师傅$/, // 没意思
                  /^真虎龙王$/,   // 喷观众
-                 /^二叔真疯狂$/    //声道不均匀
+                 /^二叔真疯狂$/,    //声道不均匀
+                 /^崔小人$/,    // 没劲, 无视观众
+                 /^韓雨辰$/,    //码率12000
                 ],
     "category": [/英雄联盟/, /穿越火线/, /CS:GO/, ]
 }

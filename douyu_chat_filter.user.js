@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         douyu_chat_filter
 // @namespace    https://github.com/iamxujian
-// @version      0.1
+// @version      0.2
 // @description  still testing
 // @author       xujian<iamxujian@gmail.com>
 // @include      /^http://www.douyutv.com/[^/]+$/
@@ -13,12 +13,12 @@ console.log("start douyu chat filter")
 
 blacklist = [
     // system info
-    /^.*?系统提示.*?欢迎.*?来到.*?的直播间$/,
+    /^.*?(系统提示)?.*?欢迎.*?来到.*?的直播间$/,
     // /^ 现在将不会看到其他玩家礼物赠送记录$/,
     // /^  .*?赠送给主播100个鱼丸$/,
     
     //色情 & 诈骗
-    /(嶶|威|微|wei|v)\s*?(性|信|幸)/i,
+    /(嶶|威|微|wei|v)[a-z ]{0,5}(性|信|幸)/i,
     /死了.*?妈/,
     /^[^:]+?:.*?微信毛片搜索/,
     /^[^:]+?:.*?youyars168/,
@@ -30,9 +30,10 @@ blacklist = [
     /网络[\d\s]*?兼职/,
     /工作室招收/,
     /刷\s*?鱼\s*?丸/,
-    /(79|43)wk(．|.|·)\s+c[0o]M/i,
+    // /\D\d\d\w\w(．|.|·)\s*?c[0⊙Θo@]M/i,
+    /\D\d\d\w\w(．|.|·)\s*?[Ｃ|c].[Ｍ|M]/i,
     /^[^:]+?:\s*$/, //纯表情
-    /^[^:]+?:.*?[qQ]\W*?(\d[-_]?)+/, //带qq的广告
+    /^[^:]+?:[^:]*?(企鹅|[qQ])\W*?(\d[-^_]?)+/, //带qq的广告
     /^[^:]+?:(.)\1{3,}$/,
     /^[^:]+?:23{2,}$/,
     /^[^:]+?:↖[^)]+↗/,
@@ -111,15 +112,23 @@ function select_zhiboxiangqing() {
     try {
 		document.getElementById("live_detal").click()
     	$("div.room_nav").remove()
+        document.getElementById("details_div").click() // 点击直播公告
     }
     catch(e){
         console.log("ignore error:", e)
     }
 }
 
+function do_not_show_yuwan() {
+    cl = document.getElementById("shieSwitch")
+    if (!cl.checked) {
+        cl.click()
+    }
+}
+
 add_time()
-setInterval(clear_chat, 500);
-document.getElementById("blackgift").click()
+setInterval(clear_chat, 1300);
+do_not_show_yuwan()
 $("li.js_room_user a.js_r_btn").remove()
 $(".b_mes_up").css("display", "none") //表情栏
 //等级栏
@@ -129,6 +138,7 @@ $(".m_rank").remove()
 select_zhiboxiangqing()
 
 document.getElementById("chat_line_list").addEventListener("DOMSubtreeModified", function(e) {
+    return
     //console.log('modified')
     if (!clearing) {
         console.log('trigger')
