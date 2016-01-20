@@ -9,3 +9,9 @@ scripts using by  Tampermonkey
 
 #### douyu_room_filter.user.js
 * using for filter rooms douyutv, since I don't wanna see any LOL
+
+#### pandatv_chat_filter.user.js
+* filter for chat column in panda.tv
+
+#### pandatv_chat_robot.user.js
+* auto send danmu in chat room of panda.tv
